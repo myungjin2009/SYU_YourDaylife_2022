@@ -1,5 +1,11 @@
-package com.example.yourdaylife;
+package com.example.ui;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
+
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -7,14 +13,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.drawerlayout.widget.DrawerLayout;
-
 import com.google.android.material.navigation.NavigationView;
 
-public class SettingActivity extends AppCompatActivity {
+public class DiaryActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     private NavigationView navigationView;
@@ -24,7 +25,7 @@ public class SettingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_setting);
+        setContentView(R.layout.activity_diary);
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -51,18 +52,18 @@ public class SettingActivity extends AppCompatActivity {
 
                 switch (menuItem.getItemId()){
                     case R.id.menu_uniCal:
-                        Intent intent_main = new Intent(SettingActivity.this, com.example.yourdaylife.MainActivity.class);
+                        Intent intent_main = new Intent(DiaryActivity.this, MainActivity.class);
                         startActivity(intent_main);
                         drawerLayout.closeDrawers();
                         return true;
                     case R.id.menu_diary:
-                        Intent intent_diary = new Intent(SettingActivity.this, DiaryActivity.class);
-                        startActivity(intent_diary);
+                        /*Intent intent_diary = new Intent(DiaryActivity.this, DiaryActivity.class);
+                        startActivity(intent_diary);*/
                         drawerLayout.closeDrawers();
                         return true;
                     case R.id.menu_setting:
-                        /*Intent intent_setting = new Intent(SettingActivity.this, SettingActivity.class);
-                        startActivity(intent_setting);*/
+                        Intent intent_setting = new Intent(DiaryActivity.this, SettingActivity.class);
+                        startActivity(intent_setting);
                         drawerLayout.closeDrawers();
                         return true;
                 }

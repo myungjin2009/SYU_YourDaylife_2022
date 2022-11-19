@@ -1,4 +1,4 @@
-package com.example.yourdaylife;
+package com.example.listviewpractice;
 
 import org.junit.Test;
 

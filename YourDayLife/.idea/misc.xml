@@ -3,11 +3,20 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/1PROJECT/Android_SYUCapstone/TeamProject/YourDayLife/app/src/main/res/drawable/ic_baseline_add_box_24.xml" value="0.1955" />
-        <entry key="..\:/1PROJECT/Android_SYUCapstone/TeamProject/YourDayLife/app/src/main/res/layout/activity_diary.xml" value="0.36614583333333334" />
-        <entry key="..\:/1PROJECT/Android_SYUCapstone/TeamProject/YourDayLife/app/src/main/res/layout/activity_main.xml" value="0.1778115501519757" />
-        <entry key="..\:/1PROJECT/Android_SYUCapstone/TeamProject/YourDayLife/app/src/main/res/layout/toolbar_main.xml" value="0.31023550724637683" />
-        <entry key="..\:/1PROJECT/Android_SYUCapstone/TeamProject/YourDayLife/app/src/main/res/menu/drawer_menu.xml" value="0.36614583333333334" />
+        <entry key="app/src/main/res/layout/activity_diary.xml" value="0.19610507246376813" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.19610507246376813" />
+        <entry key="app/src/main/res/layout/activity_setting.xml" value="0.19610507246376813" />
+        <entry key="app/src/main/res/layout/dialog_todo.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/dialog_todoadd.xml" value="0.19610507246376813" />
+        <entry key="app/src/main/res/layout/dialog_todomain.xml" value="0.19610507246376813" />
+        <entry key="app/src/main/res/layout/navi_content.xml" value="0.19610507246376813" />
+        <entry key="app/src/main/res/layout/navi_header.xml" value="0.19610507246376813" />
+        <entry key="app/src/main/res/layout/navi_main.xml" value="0.19610507246376813" />
+        <entry key="app/src/main/res/layout/toolbar_main.xml" value="0.19610507246376813" />
+        <entry key="app/src/main/res/layout/toolbar_setting.xml" value="0.19610507246376813" />
+        <entry key="app/src/main/res/menu/menu.xml" value="0.28229166666666666" />
+        <entry key="app/src/main/res/menu/menu_main.xml" value="0.28229166666666666" />
+        <entry key="app/src/main/res/menu/navi_menu.xml" value="0.28229166666666666" />
       </map>
     </option>
   </component>
