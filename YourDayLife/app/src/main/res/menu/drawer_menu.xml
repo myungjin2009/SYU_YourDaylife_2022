@@ -6,6 +6,10 @@
         android:title="학사일정"
         />
     <item
+        android:id="@+id/menu_todo"
+        android:title="할일(Todo)"
+        />
+    <item
         android:id="@+id/menu_diary"
         android:title="일기"
         />

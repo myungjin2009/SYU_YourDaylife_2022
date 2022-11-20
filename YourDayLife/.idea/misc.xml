@@ -3,6 +3,21 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/1PROJECT/SYU_YourDaylife_2022/YourDayLife/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.25" />
+        <entry key="..\:/1PROJECT/SYU_YourDaylife_2022/YourDayLife/app/src/main/res/drawable/ic_baseline_add_box_24.xml" value="0.25" />
+        <entry key="..\:/1PROJECT/SYU_YourDaylife_2022/YourDayLife/app/src/main/res/drawable/ic_baseline_check_box_24.xml" value="0.25" />
+        <entry key="..\:/1PROJECT/SYU_YourDaylife_2022/YourDayLife/app/src/main/res/drawable/ic_baseline_delete_24.xml" value="0.363" />
+        <entry key="..\:/1PROJECT/SYU_YourDaylife_2022/YourDayLife/app/src/main/res/drawable/ic_baseline_edit_24.xml" value="0.363" />
+        <entry key="..\:/1PROJECT/SYU_YourDaylife_2022/YourDayLife/app/src/main/res/drawable/ic_baseline_menu_24.xml" value="0.25" />
+        <entry key="..\:/1PROJECT/SYU_YourDaylife_2022/YourDayLife/app/src/main/res/drawable/ic_launcher_background.xml" value="0.25" />
+        <entry key="..\:/1PROJECT/SYU_YourDaylife_2022/YourDayLife/app/src/main/res/layout/activity_main.xml" value="0.38722826086956524" />
+        <entry key="..\:/1PROJECT/SYU_YourDaylife_2022/YourDayLife/app/src/main/res/layout/activity_setting.xml" value="0.38722826086956524" />
+        <entry key="..\:/1PROJECT/SYU_YourDaylife_2022/YourDayLife/app/src/main/res/layout/activity_todo.xml" value="0.2689969604863222" />
+        <entry key="..\:/1PROJECT/SYU_YourDaylife_2022/YourDayLife/app/src/main/res/layout/dialog_update.xml" value="0.38722826086956524" />
+        <entry key="..\:/1PROJECT/SYU_YourDaylife_2022/YourDayLife/app/src/main/res/layout/list_row_main.xml" value="0.38722826086956524" />
+        <entry key="..\:/1PROJECT/SYU_YourDaylife_2022/YourDayLife/app/src/main/res/layout/list_row_todo.xml" value="0.25" />
+        <entry key="..\:/1PROJECT/SYU_YourDaylife_2022/YourDayLife/app/src/main/res/layout/toolbar_main.xml" value="0.38722826086956524" />
+        <entry key="..\:/1PROJECT/SYU_YourDaylife_2022/YourDayLife/app/src/main/res/menu/drawer_menu.xml" value="0.553125" />
         <entry key="app/src/main/res/layout/activity_diary.xml" value="0.19610507246376813" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.19610507246376813" />
         <entry key="app/src/main/res/layout/activity_setting.xml" value="0.19610507246376813" />

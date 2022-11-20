@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 
+import com.example.ui.Todo.TodoActivity;
 import com.google.android.material.navigation.NavigationView;
 
 
@@ -90,6 +91,11 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.menu_uniCal:
                         /*Intent intent_main = new Intent(MainActivity.this, MainActivity.class);
                         startActivity(intent_main);*/
+                        drawerLayout.closeDrawers();
+                        return true;
+                    case R.id.menu_todo:
+                        Intent intent_todo = new Intent(MainActivity.this, TodoActivity.class);
+                        startActivity(intent_todo);
                         drawerLayout.closeDrawers();
                         return true;
                     case R.id.menu_diary:
