@@ -3,8 +3,7 @@
 - 팀원 : 김명진(4, DB), 안성민(3, 기능), 최성용(3, 디자인)
 
 ## 개발 환경
- - 프론트앤드 : HTML,CSS+BootStrap, JavaScript, AJAX
- - 백엔드 : Springboot, MySQL
+ - 프론트앤드 : AndroidStudio, Java
 
 ## 프로젝트 소개
 캘린더, ToDo list, Diary 이 3가지의 기능을 합쳤다!
