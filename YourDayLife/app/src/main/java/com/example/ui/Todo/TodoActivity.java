@@ -18,6 +18,7 @@ import com.example.ui.DB.RoomDB;
 import com.example.ui.R;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class TodoActivity extends AppCompatActivity {
@@ -70,6 +71,9 @@ public class TodoActivity extends AppCompatActivity {
 
         //불러오기 Load
         dataList = database.mainDao().getAll();
+        //▼정렬 알고리즘, 여기는 앱 들어올 때 한 번만 수행되는 곳이라 여기만 넣으면 안됨
+        sortTodoByPriority(dataList);
+        //▲정렬 알고리즘
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new TodoRecyclerAdapter(TodoActivity.this, dataList);
         recyclerView.setAdapter(adapter);
@@ -103,5 +107,11 @@ public class TodoActivity extends AppCompatActivity {
                 adapter.notifyDataSetChanged();
             }
         });
+    }
+
+    private List<TodoData> sortTodoByPriority(List<TodoData> dataList) {
+
+
+        return null;
     }
 }
