@@ -1,12 +1,16 @@
 package com.example.ui.Todo;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,6 +24,7 @@ import com.example.ui.R;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 public class TodoActivity extends AppCompatActivity {
@@ -27,6 +32,7 @@ public class TodoActivity extends AppCompatActivity {
     EditText editText;
     Button btAdd, btReset;
     RecyclerView recyclerView;
+    TextView textDate;
 
     //spinner 우선순위 값
     String[] priorityItems = {"높음", "중간", "낮음"};
@@ -45,6 +51,23 @@ public class TodoActivity extends AppCompatActivity {
         btAdd = findViewById(R.id.bt_add);
         btReset = findViewById(R.id.bt_reset);
         recyclerView = findViewById(R.id.recycler_view);
+        textDate = findViewById(R.id.text_date);
+
+
+        DatePickerDialog.OnDateSetListener listener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                Toast.makeText(getApplicationContext(), year + "년" + (month+1) + "월" + dayOfMonth + "일", Toast.LENGTH_SHORT).show();
+            }
+        };
+        DatePickerDialog dialog = new DatePickerDialog(this, listener, 2013, 9, 22);
+
+        textDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.show();
+            }
+        });
 
         //▼ 우선순위 spinner
         Spinner spinner = findViewById(R.id.priority_spinner);
