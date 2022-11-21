@@ -18,10 +18,18 @@
             android:buttonTint="#FFFFFF" />
 
         <TextView
+            android:id="@+id/text_priority"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2"
+            android:text="순위" />
+
+        <TextView
             android:id="@+id/text_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:text="내용"
             android:textSize="14sp" />
 
         <ImageView

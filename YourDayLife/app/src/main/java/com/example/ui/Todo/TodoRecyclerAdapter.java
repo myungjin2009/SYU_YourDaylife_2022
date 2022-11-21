@@ -45,7 +45,21 @@ public class TodoRecyclerAdapter extends RecyclerView.Adapter<TodoRecyclerAdapte
     public void onBindViewHolder(@NonNull final TodoRecyclerAdapter.ViewHolder holder, int position)
     {
         final TodoData data = dataList.get(position);
+        String priority = "중간";
         database = RoomDB.getInstance(context);
+
+        switch (data.getPriority()) {
+            case 0:
+                priority = "높음!";
+                break;
+            case 1:
+                priority = "중간";
+                break;
+            case 2:
+                priority = "낮음";
+                break;
+        }
+        holder.priorityView.setText(priority);
         holder.textView.setText(data.getText());
         holder.btEdit.setOnClickListener(new View.OnClickListener()
         {
@@ -116,12 +130,13 @@ public class TodoRecyclerAdapter extends RecyclerView.Adapter<TodoRecyclerAdapte
 
     public class ViewHolder extends RecyclerView.ViewHolder
     {
-        TextView textView;
+        TextView textView, priorityView;
         ImageView btEdit, btDelete;
 
         public ViewHolder(@NonNull View view)
         {
             super(view);
+            priorityView = view.findViewById(R.id.text_priority);
             textView = view.findViewById(R.id.text_view);
             btEdit = view.findViewById(R.id.bt_edit);
             btDelete = view.findViewById(R.id.bt_delete);
