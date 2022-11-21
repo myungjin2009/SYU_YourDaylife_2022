@@ -18,6 +18,8 @@ import com.example.ui.DB.RoomDB;
 import com.example.ui.R;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class TodoActivity extends AppCompatActivity {
@@ -67,9 +69,8 @@ public class TodoActivity extends AppCompatActivity {
         //▲ 우선순위 spinner
 
         database = RoomDB.getInstance(this);
-
-        //불러오기 Load
-        dataList = database.mainDao().getAll();
+        dataList = database.mainDao().getAll();     //불러오기 Load
+        dataList = sortTodoByPriority(dataList);    //정렬 알고리즘
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new TodoRecyclerAdapter(TodoActivity.this, dataList);
         recyclerView.setAdapter(adapter);
@@ -88,6 +89,7 @@ public class TodoActivity extends AppCompatActivity {
                     editText.setText("");
                     dataList.clear();
                     dataList.addAll(database.mainDao().getAll());
+                    dataList = sortTodoByPriority(dataList);    //정렬 알고리즘
                     adapter.notifyDataSetChanged();
                 }
             }
@@ -103,5 +105,19 @@ public class TodoActivity extends AppCompatActivity {
                 adapter.notifyDataSetChanged();
             }
         });
+    }
+
+    //Todo를 우선순위 기준으로 정렬
+    private List<TodoData> sortTodoByPriority(List<TodoData> dataList) {
+        Comparator<TodoData> comparator = new Comparator<TodoData>() {
+            @Override
+            public int compare(TodoData o1, TodoData o2) {
+                if (o1.getPriority() > o2.getPriority()) return 1;
+                else if(o1.getPriority() == o2.getPriority()) return 0;
+                else return -1;
+            }
+        };
+        Collections.sort(dataList, comparator);
+        return dataList;
     }
 }
