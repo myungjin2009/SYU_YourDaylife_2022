@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ui.DB.Model.TodoData;
 import com.example.ui.DB.RoomDB;
+import com.example.ui.Module.CustomSort;
 import com.example.ui.R;
 
 import java.util.List;
@@ -98,6 +99,7 @@ public class TodoRecyclerAdapter extends RecyclerView.Adapter<TodoRecyclerAdapte
 
                         dataList.clear();
                         dataList.addAll(database.mainDao().getAll());
+                        dataList = CustomSort.sortTodoByPriority(dataList);    //정렬 알고리즘
                         notifyDataSetChanged();
                     }
                 });

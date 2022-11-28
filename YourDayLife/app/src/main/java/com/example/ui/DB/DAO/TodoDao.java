@@ -27,4 +27,7 @@ public interface TodoDao {
 
     @Query("SELECT * FROM TodoData")
     List<TodoData> getAll();
+
+    @Query("SELECT * FROM TodoData WHERE createdDate LIKE '%' || :date  || '%'")
+    List<TodoData> getCurrentDate(String date);
 }

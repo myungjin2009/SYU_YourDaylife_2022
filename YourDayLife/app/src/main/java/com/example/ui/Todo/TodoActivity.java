@@ -1,6 +1,7 @@
 package com.example.ui.Todo;
 
 import android.app.DatePickerDialog;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -13,18 +14,21 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ui.DB.Model.TodoData;
 import com.example.ui.DB.RoomDB;
+import com.example.ui.Module.CustomSort;
+import com.example.ui.Module.CustomTime;
 import com.example.ui.R;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
 import java.util.List;
 
 public class TodoActivity extends AppCompatActivity {
@@ -42,6 +46,7 @@ public class TodoActivity extends AppCompatActivity {
     RoomDB database;
     TodoRecyclerAdapter adapter;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,15 +57,19 @@ public class TodoActivity extends AppCompatActivity {
         btReset = findViewById(R.id.bt_reset);
         recyclerView = findViewById(R.id.recycler_view);
         textDate = findViewById(R.id.text_date);
+        LocalDate localDate = CustomTime.getToday();
+        textDate.setText(localDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 
 
         DatePickerDialog.OnDateSetListener listener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                Toast.makeText(getApplicationContext(), year + "년" + (month+1) + "월" + dayOfMonth + "일", Toast.LENGTH_SHORT).show();
+                textDate.setText(year + "-" + (month+1) + "-" + dayOfMonth);
+                loadTodo();
+                adapter.notifyDataSetChanged();
             }
         };
-        DatePickerDialog dialog = new DatePickerDialog(this, listener, 2013, 9, 22);
+        DatePickerDialog dialog = new DatePickerDialog(this, listener, localDate.getYear(), localDate.getMonthValue()-1, localDate.getDayOfMonth());
 
         textDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,8 +101,7 @@ public class TodoActivity extends AppCompatActivity {
         //▲ 우선순위 spinner
 
         database = RoomDB.getInstance(this);
-        dataList = database.mainDao().getAll();     //불러오기 Load
-        dataList = sortTodoByPriority(dataList);    //정렬 알고리즘
+        loadTodo();
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new TodoRecyclerAdapter(TodoActivity.this, dataList);
         recyclerView.setAdapter(adapter);
@@ -105,14 +113,13 @@ public class TodoActivity extends AppCompatActivity {
                 String sText = editText.getText().toString().trim();
                 if (!sText.equals("")) {
                     TodoData data = new TodoData();
+                    data.setCreatedDate(textDate.getText().toString());
                     data.setText(sText);
                     data.setPriority(selectedPriority);
                     spinner.setSelection(1);
                     database.mainDao().insert(data);
                     editText.setText("");
-                    dataList.clear();
-                    dataList.addAll(database.mainDao().getAll());
-                    dataList = sortTodoByPriority(dataList);    //정렬 알고리즘
+                    loadTodo();
                     adapter.notifyDataSetChanged();
                 }
             }
@@ -122,25 +129,15 @@ public class TodoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 database.mainDao().reset(dataList);
-
                 dataList.clear();
-                dataList.addAll(database.mainDao().getAll());
+                loadTodo();
                 adapter.notifyDataSetChanged();
             }
         });
     }
-
-    //Todo를 우선순위 기준으로 정렬
-    private List<TodoData> sortTodoByPriority(List<TodoData> dataList) {
-        Comparator<TodoData> comparator = new Comparator<TodoData>() {
-            @Override
-            public int compare(TodoData o1, TodoData o2) {
-                if (o1.getPriority() > o2.getPriority()) return 1;
-                else if(o1.getPriority() == o2.getPriority()) return 0;
-                else return -1;
-            }
-        };
-        Collections.sort(dataList, comparator);
-        return dataList;
+    private void loadTodo() {   //textDate 날짜의 Todo 불러와서 정렬하기
+        dataList.clear();
+        dataList.addAll(database.mainDao().getCurrentDate(textDate.getText().toString()));     //오늘 날짜의 textString값으로 불러오기 Load
+        dataList = CustomSort.sortTodoByPriority(dataList);    //정렬 알고리즘
     }
 }
