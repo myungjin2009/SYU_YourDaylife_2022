@@ -89,8 +89,8 @@ public class MainActivity extends AppCompatActivity {
 
                 switch (menuItem.getItemId()){
                     case R.id.menu_uniCal:
-                        /*Intent intent_main = new Intent(MainActivity.this, MainActivity.class);
-                        startActivity(intent_main);*/
+                        Intent intent_main = new Intent(MainActivity.this, CrawllingTestActivity.class);
+                        startActivity(intent_main);
                         drawerLayout.closeDrawers();
                         return true;
                     case R.id.menu_todo:
