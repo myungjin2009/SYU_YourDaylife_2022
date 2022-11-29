@@ -14,6 +14,8 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
 
+import com.example.ui.DB.Model.ScheduleData;
+import com.example.ui.DB.RoomDB;
 import com.example.ui.R;
 
 import org.jsoup.Jsoup;
@@ -52,6 +54,9 @@ public class CrawllingTestActivity extends AppCompatActivity {
     final Bundle bundle5 = new Bundle();
     String[] my_link = new String[5];
 
+    //DB사용을 위한..
+    RoomDB database;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +69,8 @@ public class CrawllingTestActivity extends AppCompatActivity {
         textview5 = (TextView) findViewById(R.id.textview5);
         msg1="학사 일정 없음";
         textview.setText(msg1);
+
+        database = RoomDB.getInstance(this);
 
         textview1.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -235,6 +242,17 @@ public class CrawllingTestActivity extends AppCompatActivity {
                                 for (int i = 0; i < Month.size(); i++) {
                                     //데베에 저장할땐 여기 부분 차례대로 속성마다 저장하면 될듯
                                     msg += Year.select(".year").text() + " " + Month.select("dt").eq(i).text() + "  " + Scl.select("dd").eq(i).text() + "\n";
+                                    Log.d("년도", Year.select(".year").text());
+                                    Log.d("월", Month.select("dt").eq(i).text());
+                                    Log.d("일정 내용",  Scl.select("dd").eq(i).text());
+
+
+                                    ScheduleData scheduleData = new ScheduleData();
+                                    scheduleData.setYear(Year.select(".year").text());
+                                    scheduleData.setDate(Month.select("dt").eq(i).text());
+                                    scheduleData.setContent(Scl.select("dd").eq(i).text());
+
+                                    database.scheduleDao().insert(scheduleData);
                                 }
                             }
                             bundle.putString("message", msg);

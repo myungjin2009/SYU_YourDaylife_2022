@@ -61,16 +61,19 @@ public class TodoActivity extends AppCompatActivity {
         textDate.setText(localDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 
 
+        //달력에서 날짜 바꿨을 때
         DatePickerDialog.OnDateSetListener listener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 textDate.setText(year + "-" + (month+1) + "-" + dayOfMonth);
                 loadTodo();
+                adapter.setToday(textDate.getText().toString());
                 adapter.notifyDataSetChanged();
             }
         };
         DatePickerDialog dialog = new DatePickerDialog(this, listener, localDate.getYear(), localDate.getMonthValue()-1, localDate.getDayOfMonth());
 
+        //달력 창 띄우기
         textDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,7 +106,7 @@ public class TodoActivity extends AppCompatActivity {
         database = RoomDB.getInstance(this);
         loadTodo();
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new TodoRecyclerAdapter(TodoActivity.this, dataList);
+        adapter = new TodoRecyclerAdapter(TodoActivity.this, dataList, textDate.getText().toString());
         recyclerView.setAdapter(adapter);
 
         //저장 Save

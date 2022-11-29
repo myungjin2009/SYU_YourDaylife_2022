@@ -6,10 +6,12 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
+import com.example.ui.DB.DAO.ScheduleDAO;
 import com.example.ui.DB.DAO.TodoDao;
+import com.example.ui.DB.Model.ScheduleData;
 import com.example.ui.DB.Model.TodoData;
 
-@Database(entities = {TodoData.class}, version = 1, exportSchema = false)
+@Database(entities = {TodoData.class, ScheduleData.class}, version = 1, exportSchema = false)
 public abstract class RoomDB extends RoomDatabase {
     private static RoomDB database;
 
@@ -33,5 +35,7 @@ public abstract class RoomDB extends RoomDatabase {
     //---
 
     public abstract TodoDao mainDao();
+
+    public abstract ScheduleDAO scheduleDao();
 
 }
