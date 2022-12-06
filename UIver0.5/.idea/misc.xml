@@ -3,7 +3,19 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/1PROJECT/SYU_YourDaylife_2022/UIver0.5/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.1255" />
+        <entry key="..\:/1PROJECT/SYU_YourDaylife_2022/UIver0.5/app/src/main/res/drawable/ic_baseline_add_box_24.xml" value="0.1255" />
+        <entry key="..\:/1PROJECT/SYU_YourDaylife_2022/UIver0.5/app/src/main/res/drawable/ic_baseline_check_24.xml" value="0.1255" />
+        <entry key="..\:/1PROJECT/SYU_YourDaylife_2022/UIver0.5/app/src/main/res/drawable/ic_baseline_check_box_24.xml" value="0.1255" />
+        <entry key="..\:/1PROJECT/SYU_YourDaylife_2022/UIver0.5/app/src/main/res/drawable/ic_baseline_menu_24.xml" value="0.1255" />
+        <entry key="..\:/1PROJECT/SYU_YourDaylife_2022/UIver0.5/app/src/main/res/drawable/ic_baseline_sync_24.xml" value="0.1255" />
+        <entry key="..\:/1PROJECT/SYU_YourDaylife_2022/UIver0.5/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1255" />
         <entry key="..\:/1PROJECT/SYU_YourDaylife_2022/UIver0.5/app/src/main/res/layout/activity_main.xml" value="0.24375" />
+        <entry key="..\:/1PROJECT/SYU_YourDaylife_2022/UIver0.5/app/src/main/res/layout/dialog_todoadd.xml" value="0.17603850050658562" />
+        <entry key="..\:/1PROJECT/SYU_YourDaylife_2022/UIver0.5/app/src/main/res/layout/dialog_todomain.xml" value="0.67" />
+        <entry key="..\:/1PROJECT/SYU_YourDaylife_2022/UIver0.5/app/src/main/res/layout/toolbar_main.xml" value="0.17603850050658562" />
+        <entry key="..\:/1PROJECT/SYU_YourDaylife_2022/UIver0.5/app/src/main/res/layout/toolbar_setting.xml" value="0.17603850050658562" />
+        <entry key="..\:/1PROJECT/SYU_YourDaylife_2022/UIver0.5/app/src/main/res/menu/drawer_menu.xml" value="0.33055555555555555" />
         <entry key="app/src/main/res/drawable/ic_baseline_add_box_24.xml" value="0.1235" />
         <entry key="app/src/main/res/drawable/ic_baseline_check_box_24.xml" value="0.1235" />
         <entry key="app/src/main/res/layout/activity_diary.xml" value="0.19610507246376813" />

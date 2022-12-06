@@ -24,12 +24,11 @@ import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Toolbar toolbar;
+    public Toolbar toolbar;
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
     private ImageView toolbar_menu, toolbar_todo;
-    private Dialog dialog_todoMain;
-    private Button btn_todoAdd, btn_todoDone;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,32 +46,16 @@ public class MainActivity extends AppCompatActivity {
         toolbar_menu = findViewById(R.id.toolbar_menu);
         toolbar_todo = findViewById(R.id.toolbar_todo);
 
-        dialog_todoMain = new Dialog(MainActivity.this);
-        //dialog_todoMain.setContentView(R.layout.dialog_todoMain);
 
-        btn_todoAdd = findViewById(R.id.btn_todoAdd);
-        btn_todoDone = findViewById(R.id.btn_todoDone);
 
         toolbar_todo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialog_todoMain.show();
+                todoDialog todoDlg = new todoDialog(MainActivity.this);
+                todoDlg.show();
             }
         });
 
-//        btn_todoDone.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                dialog_todoMain.dismiss();
-//            }
-//        });
-//
-//        btn_todoAdd.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
 
         //메뉴버튼 눌렀을때
         toolbar_menu.setOnClickListener(new View.OnClickListener() {
@@ -115,5 +98,4 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-
 }

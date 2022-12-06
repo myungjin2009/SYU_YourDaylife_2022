@@ -4,7 +4,7 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:id="@+id/xxxxx"
+        android:id="@+id/xxxxx2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -12,7 +12,8 @@
         <ListView
             android:layout_weight="1"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -21,7 +22,7 @@
             >
 
             <Button
-                android:id="@+id/btn_todoCancle"
+                android:id="@+id/btn_todoCancel"
                 android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -29,12 +30,14 @@
                 android:backgroundTint="#ffc0cb"/>
 
             <Button
-                android:id="@+id/btn_todoAddT"
+                android:id="@+id/btn_todoAdd2"
                 android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="추가"
                 android:backgroundTint="#ffc0cb"/>
+
+
 
         </LinearLayout>
 
