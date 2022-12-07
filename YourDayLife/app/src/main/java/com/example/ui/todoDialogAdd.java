@@ -30,7 +30,7 @@ public class todoDialogAdd extends Dialog {
             }
         });
 
-        Button btn_todoAdd2 = findViewById(R.id.btn_todoAdd2);
+        Button btn_todoAdd2 = findViewById(R.id.bt_add);
         btn_todoAdd2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
