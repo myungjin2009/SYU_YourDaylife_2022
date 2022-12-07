@@ -26,13 +26,13 @@ public class TodoRecyclerAdapter extends RecyclerView.Adapter<TodoRecyclerAdapte
     private List<TodoData> dataList;
     private Activity context;
     private RoomDB database;
-    private String today;
+    private String currentDay;
 
-    public TodoRecyclerAdapter(Activity context, List<TodoData> dataList, String today)
+    public TodoRecyclerAdapter(Activity context, List<TodoData> dataList, String currentDay)
     {
         this.context = context;
         this.dataList = dataList;
-        this.today = today;
+        this.currentDay = currentDay;
         notifyDataSetChanged();
     }
 
@@ -100,7 +100,7 @@ public class TodoRecyclerAdapter extends RecyclerView.Adapter<TodoRecyclerAdapte
                         database.mainDao().update(sID, uText);
 
                         dataList.clear();
-                        dataList.addAll(database.mainDao().getCurrentDate(today));     //오늘 날짜의 textString값으로 불러오기 Load
+                        dataList.addAll(database.mainDao().getCurrentDate(currentDay));     //해당 날짜의 textString값으로 불러오기 Load
                         dataList = CustomSort.sortTodoByPriority(dataList);    //정렬 알고리즘
 
                         notifyDataSetChanged();
@@ -134,11 +134,11 @@ public class TodoRecyclerAdapter extends RecyclerView.Adapter<TodoRecyclerAdapte
     }
 
     public String getToday() {
-        return today;
+        return currentDay;
     }
 
-    public void setToday(String today) {
-        this.today = today;
+    public void setToday(String currentDay) {
+        this.currentDay = currentDay;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder

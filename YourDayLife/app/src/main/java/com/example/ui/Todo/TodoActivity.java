@@ -31,6 +31,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+@Deprecated
 public class TodoActivity extends AppCompatActivity {
 
     EditText editText;

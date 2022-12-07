@@ -1,25 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="320dp"
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:id="@+id/xxxxx2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <ListView
-            android:layout_weight="1"
-            android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/text_date"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            />
+            android:background="#B8F3D0"
+            android:text="1999-12-31"
+            android:gravity="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            >
+            android:layout_marginTop="8dp">
+
+            <Spinner
+                android:id="@+id/priority_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+
+
+            <EditText
+                android:id="@+id/edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="textPersonName"
+                android:hint="Todo를 기록하세요."
+                android:padding="12dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/btn_todoCancel"
@@ -28,19 +50,13 @@
                 android:layout_height="match_parent"
                 android:text="취소"
                 android:backgroundTint="#ffc0cb"/>
-
             <Button
-                android:id="@+id/btn_todoAdd2"
+                android:id="@+id/bt_add"
                 android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="추가"
                 android:backgroundTint="#ffc0cb"/>
-
-
-
         </LinearLayout>
-
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
