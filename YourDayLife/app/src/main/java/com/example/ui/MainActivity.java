@@ -7,18 +7,15 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 
 
-import com.example.ui.Todo.TodoActivity;
 import com.example.ui.Todo.TodoListActivity;
 import com.google.android.material.navigation.NavigationView;
 
@@ -48,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         toolbar_todo = findViewById(R.id.toolbar_todo);
 
 
-
+        //오른쪽 상단 체크(TodoList) 버튼
         toolbar_todo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,11 +72,6 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.menu_uniCal:
                         Intent intent_main = new Intent(MainActivity.this, CrawllingTestActivity.class);
                         startActivity(intent_main);
-                        drawerLayout.closeDrawers();
-                        return true;
-                    case R.id.menu_todo:
-                        Intent intent_todo = new Intent(MainActivity.this, TodoActivity.class);
-                        startActivity(intent_todo);
                         drawerLayout.closeDrawers();
                         return true;
                     case R.id.menu_diary:

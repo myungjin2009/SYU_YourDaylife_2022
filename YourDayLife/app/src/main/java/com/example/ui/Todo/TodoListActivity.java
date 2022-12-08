@@ -33,6 +33,7 @@ public class TodoListActivity extends Dialog {
     Context context;
     RecyclerView recyclerView;
     TextView textDate;
+    String currentDate;
 
     RoomDB database;
     List<TodoData> dataList = new ArrayList<>();
@@ -43,6 +44,12 @@ public class TodoListActivity extends Dialog {
         super(context);
         this.context = context;
         activity = (Activity) context;
+    }
+    public TodoListActivity(@NonNull Context context, String currentDate) {
+        super(context);
+        this.context = context;
+        activity = (Activity) context;
+        this.currentDate = currentDate;
     }
 
 
@@ -55,7 +62,11 @@ public class TodoListActivity extends Dialog {
 
         textDate = findViewById(R.id.text_date);
         LocalDate localDate = CustomTime.getToday();
-        textDate.setText(localDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+        if (currentDate == null) {
+            textDate.setText(localDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+        } else {
+            textDate.setText(currentDate);
+        }
 
         database = RoomDB.getInstance(context);
         loadTodo();
@@ -68,17 +79,8 @@ public class TodoListActivity extends Dialog {
         DatePickerDialog.OnDateSetListener listener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-
-                //한자릿수 >> 두자리수로 변환 (4월 5일 >> 04월 05일)
-                String convertMonth, convertDayOfMonth;
-                convertMonth = ((month+1) > 1 && (month+1) < 10) ?
-                        "0"+(month+1) :
-                        String.valueOf(month+1) ;
-                convertDayOfMonth = (dayOfMonth > 1 && dayOfMonth < 10) ?
-                        "0"+dayOfMonth :
-                        String.valueOf(dayOfMonth);
-
-                textDate.setText(year + "-" + convertMonth + "-" + convertDayOfMonth);
+                List<String> monthAndDay = CustomTime.convertZeroDigit(month, dayOfMonth);
+                textDate.setText(year + "-" + monthAndDay.get(0) + "-" + monthAndDay.get(1));
                 loadTodo();
                 adapter.setToday(textDate.getText().toString());
                 adapter.notifyDataSetChanged();
@@ -108,12 +110,15 @@ public class TodoListActivity extends Dialog {
         btn_todoAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AddTodoListActivity addTodoListActivity = new AddTodoListActivity(context);
+                AddTodoListActivity addTodoListActivity = new AddTodoListActivity(context, localDate);
                 addTodoListActivity.show();
+                dismiss();
             }
         });
 
     }
+
+
 
     private void loadTodo() {   //textDate 날짜의 Todo 불러와서 정렬하기
         dataList.clear();

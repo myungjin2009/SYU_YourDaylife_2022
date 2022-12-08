@@ -14,9 +14,6 @@
             android:name=".SettingActivity"
             android:exported="false" />
         <activity
-            android:name=".Todo.TodoActivity"
-            android:exported="false" />
-        <activity
             android:name=".DiaryActivity"
             android:exported="false" />
         <activity
