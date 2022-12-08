@@ -31,6 +31,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+@Deprecated
 public class TodoActivity extends AppCompatActivity {
 
     EditText editText;
@@ -65,7 +66,17 @@ public class TodoActivity extends AppCompatActivity {
         DatePickerDialog.OnDateSetListener listener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                textDate.setText(year + "-" + (month+1) + "-" + dayOfMonth);
+
+                //한자릿수 >> 두자리수로 변환 (4월 5일 >> 04월 05일)
+                String convertMonth, convertDayOfMonth;
+                convertMonth = ((month+1) > 1 && (month+1) < 10) ?
+                        "0"+(month+1) :
+                        String.valueOf(month+1) ;
+                convertDayOfMonth = (dayOfMonth > 1 && dayOfMonth < 10) ?
+                        "0"+dayOfMonth :
+                        String.valueOf(dayOfMonth);
+
+                textDate.setText(year + "-" + convertMonth + "-" + convertDayOfMonth);
                 loadTodo();
                 adapter.setToday(textDate.getText().toString());
                 adapter.notifyDataSetChanged();

@@ -19,6 +19,7 @@ import android.widget.ImageView;
 
 
 import com.example.ui.Todo.TodoActivity;
+import com.example.ui.Todo.TodoListActivity;
 import com.google.android.material.navigation.NavigationView;
 
 
@@ -51,8 +52,8 @@ public class MainActivity extends AppCompatActivity {
         toolbar_todo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                todoDialog todoDlg = new todoDialog(MainActivity.this);
-                todoDlg.show();
+                TodoListActivity todoListActivity = new TodoListActivity(MainActivity.this);
+                todoListActivity.show();
             }
         });
 

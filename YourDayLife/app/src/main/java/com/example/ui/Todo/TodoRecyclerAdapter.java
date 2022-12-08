@@ -2,6 +2,7 @@ package com.example.ui.Todo;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,9 +10,11 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ui.DB.Model.TodoData;
@@ -54,15 +57,19 @@ public class TodoRecyclerAdapter extends RecyclerView.Adapter<TodoRecyclerAdapte
         switch (data.getPriority()) {
             case 0:
                 priority = "높음!";
+                holder.mainView.setBackgroundColor(Color.parseColor("#CD3861")); //옅은 자홍색
                 break;
             case 1:
                 priority = "중간";
+                holder.mainView.setBackgroundColor(Color.parseColor("#FFE650")); //옅은 노랑색
                 break;
             case 2:
                 priority = "낮음";
+                //DEFAULT COLOR : #BDBDBD : 짙은 회색
                 break;
         }
         holder.priorityView.setText(priority);
+        System.out.println(data.getText());
         holder.textView.setText(data.getText());
         holder.btEdit.setOnClickListener(new View.OnClickListener()
         {
@@ -143,12 +150,14 @@ public class TodoRecyclerAdapter extends RecyclerView.Adapter<TodoRecyclerAdapte
 
     public class ViewHolder extends RecyclerView.ViewHolder
     {
+        LinearLayout mainView;
         TextView textView, priorityView;
         ImageView btEdit, btDelete;
 
         public ViewHolder(@NonNull View view)
         {
             super(view);
+            mainView = view.findViewById(R.id.mainView);
             priorityView = view.findViewById(R.id.text_priority);
             textView = view.findViewById(R.id.text_view);
             btEdit = view.findViewById(R.id.bt_edit);
