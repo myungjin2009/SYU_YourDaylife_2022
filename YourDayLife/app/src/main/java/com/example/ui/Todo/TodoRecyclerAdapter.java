@@ -69,7 +69,6 @@ public class TodoRecyclerAdapter extends RecyclerView.Adapter<TodoRecyclerAdapte
                 break;
         }
         holder.priorityView.setText(priority);
-        System.out.println(data.getText());
         holder.textView.setText(data.getText());
         holder.btEdit.setOnClickListener(new View.OnClickListener()
         {

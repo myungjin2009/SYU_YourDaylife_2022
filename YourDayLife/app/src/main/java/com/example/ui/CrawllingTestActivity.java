@@ -2,6 +2,7 @@ package com.example.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -33,6 +34,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@Deprecated
 public class CrawllingTestActivity extends AppCompatActivity {
 
     //현재 월 설정
@@ -56,6 +58,8 @@ public class CrawllingTestActivity extends AppCompatActivity {
 
     //DB사용을 위한..
     RoomDB database;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

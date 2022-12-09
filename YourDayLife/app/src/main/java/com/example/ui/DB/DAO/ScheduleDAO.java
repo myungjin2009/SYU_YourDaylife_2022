@@ -2,6 +2,7 @@ package com.example.ui.DB.DAO;
 
 import static androidx.room.OnConflictStrategy.REPLACE;
 
+import androidx.lifecycle.MutableLiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -19,7 +20,7 @@ public interface ScheduleDAO {
     void insert(ScheduleData scheduleModel);
 
     @Delete
-    void reset(List<TodoData> todoData);
+    void reset(List<ScheduleData> scheduleData);
 
     @Query("SELECT * FROM ScheduleData")
     List<ScheduleData> getAll();

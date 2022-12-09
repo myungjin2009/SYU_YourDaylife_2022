@@ -16,10 +16,12 @@
 
         <include layout="@layout/toolbar_main"/>
 
-        <ListView
-            android:layout_weight="6"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="180dp"
+            android:layout_marginTop="8dp"
+            tools:listitem = "@layout/list_row_todo"/>
 
         <ListView
             android:layout_weight="4"
