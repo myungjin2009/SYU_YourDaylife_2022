@@ -22,8 +22,6 @@ import com.example.ui.Module.CustomSort;
 import com.example.ui.Module.CustomTime;
 import com.example.ui.R;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +32,7 @@ public class TodoListActivity extends Dialog {
     RecyclerView recyclerView;
     TextView textDate;
     String currentDate;
+    List<Integer> todayDate = new ArrayList<>();
 
     RoomDB database;
     List<TodoData> dataList = new ArrayList<>();
@@ -60,13 +59,13 @@ public class TodoListActivity extends Dialog {
         setContentView(R.layout.dialog_todomain);
         recyclerView = findViewById(R.id.recycler_view);
 
-        textDate = findViewById(R.id.text_date);
-        LocalDate localDate = CustomTime.getToday();
-        if (currentDate == null) {
-            textDate.setText(localDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-        } else {
-            textDate.setText(currentDate);
+        if(currentDate == null) {
+            currentDate = CustomTime.getTodayToString();
         }
+
+        textDate = findViewById(R.id.text_date);
+        todayDate = CustomTime.getTodayToList();
+        textDate.setText(currentDate);
 
         database = RoomDB.getInstance(context);
         loadTodo();
@@ -80,13 +79,14 @@ public class TodoListActivity extends Dialog {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 List<String> monthAndDay = CustomTime.convertZeroDigit(month, dayOfMonth);
-                textDate.setText(year + "-" + monthAndDay.get(0) + "-" + monthAndDay.get(1));
+                currentDate = year + "-" + monthAndDay.get(0) + "-" + monthAndDay.get(1);
+                textDate.setText(currentDate);
                 loadTodo();
                 adapter.setToday(textDate.getText().toString());
                 adapter.notifyDataSetChanged();
             }
         };
-        DatePickerDialog dialog = new DatePickerDialog(this.context, listener, localDate.getYear(), localDate.getMonthValue()-1, localDate.getDayOfMonth());
+        DatePickerDialog dialog = new DatePickerDialog(this.context, listener, todayDate.get(0), todayDate.get(1), todayDate.get(2));
 
         //상단 '날짜 텍스트' 선택 시, 달력창 띄우기
         textDate.setOnClickListener(new View.OnClickListener() {
@@ -110,15 +110,13 @@ public class TodoListActivity extends Dialog {
         btn_todoAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AddTodoListActivity addTodoListActivity = new AddTodoListActivity(context, localDate);
+                AddTodoListActivity addTodoListActivity = new AddTodoListActivity(context, currentDate);
                 addTodoListActivity.show();
                 dismiss();
             }
         });
 
     }
-
-
 
     private void loadTodo() {   //textDate 날짜의 Todo 불러와서 정렬하기
         dataList.clear();

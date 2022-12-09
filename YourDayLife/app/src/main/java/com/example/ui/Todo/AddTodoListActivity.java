@@ -22,9 +22,10 @@ import com.example.ui.DB.RoomDB;
 import com.example.ui.MainActivity;
 import com.example.ui.Module.CustomTime;
 import com.example.ui.R;
+import com.jakewharton.threetenabp.AndroidThreeTen;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import org.threeten.bp.LocalDate;
+import org.threeten.bp.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,17 +34,19 @@ public class AddTodoListActivity extends Dialog {
     //spinner 우선순위 값
     String[] priorityItems = {"높음", "중간", "낮음"};
     int selectedPriority = 1;   //우선순위 기본값 : '중간'
-    LocalDate localDate;         //선택된 날짜
+    //LocalDate localDate;         //선택된 날짜
+    String currentDate;
+    List<Integer> currentDateList;
     RoomDB database;
     TextView textDate;
     EditText editText;
 
 
     Context context;
-    public AddTodoListActivity(@NonNull Context context, LocalDate currentDate) {
+    public AddTodoListActivity(@NonNull Context context, String currentDate) {
         super(context);
         this.context = context;
-        this.localDate = currentDate;
+        this.currentDate = currentDate;
     }
 
     private void showTodoDialog(String currentDate) {
@@ -61,12 +64,13 @@ public class AddTodoListActivity extends Dialog {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        AndroidThreeTen.init(context);
         setContentView(R.layout.dialog_todoadd);
         editText = findViewById(R.id.edit_text);
         textDate = findViewById(R.id.text_date);
-        textDate.setText(localDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+        textDate.setText(currentDate);
         database = RoomDB.getInstance(context);
+        currentDateList = CustomTime.stringToLocalDate(currentDate);
 
         //우선순위 (높음,중간,낮음) spinner
         Spinner spinner = findViewById(R.id.priority_spinner);
@@ -97,7 +101,7 @@ public class AddTodoListActivity extends Dialog {
                 textDate.setText(year + "-" + monthAndDay.get(0) + "-" + monthAndDay.get(1));
             }
         };
-        DatePickerDialog dialog = new DatePickerDialog(this.context, listener, localDate.getYear(), localDate.getMonthValue()-1, localDate.getDayOfMonth());
+        DatePickerDialog dialog = new DatePickerDialog(this.context, listener, currentDateList.get(0), currentDateList.get(1), currentDateList.get(2));
 
         //달력 창 띄우기
         textDate.setOnClickListener(new View.OnClickListener() {

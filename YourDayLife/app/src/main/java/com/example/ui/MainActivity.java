@@ -18,6 +18,7 @@ import android.widget.ImageView;
 
 import com.example.ui.Todo.TodoListActivity;
 import com.google.android.material.navigation.NavigationView;
+import com.jakewharton.threetenabp.AndroidThreeTen;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        AndroidThreeTen.init(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 

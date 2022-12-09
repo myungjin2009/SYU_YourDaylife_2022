@@ -1,12 +1,15 @@
 package com.example.ui.Module;
 
 import android.os.Build;
-
 import androidx.annotation.RequiresApi;
 
+import com.jakewharton.threetenabp.AndroidThreeTen;
+
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import org.threeten.bp.LocalDate;
+import org.threeten.bp.LocalDateTime;
+import org.threeten.bp.format.DateTimeFormatter;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -26,9 +29,28 @@ public class CustomTime {
         return localDate;
     }
 
-    //문자열로된 시각을 객체로 반환
-    public static LocalDateTime stringToLocalDateTime(String string) {
-        return null;
+    //오늘 날짜를 문자열 "yyyy-MM-dd" 로 반환
+    public static String getTodayToString() {
+        return localDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+    }
+
+    //오늘 날짜를 숫자형 리스트로 반환
+    public static List<Integer> getTodayToList() {
+        List<Integer> ListToday = new ArrayList<>();
+        ListToday.add(0,localDate.getYear());
+        ListToday.add(1, localDate.getMonthValue() - 1);
+        ListToday.add(2, localDate.getDayOfMonth());
+        return ListToday;
+    }
+
+    //"yyyy-MM-dd"로 이로어진 문자열을 List<Integer> 객체로 반환
+    public static List<Integer> stringToLocalDate(String string) {
+        LocalDate date = LocalDate.parse(string, DateTimeFormatter.ISO_DATE);
+        List<Integer> ListDate = new ArrayList<>();
+        ListDate.add(0,localDate.getYear());
+        ListDate.add(1, localDate.getMonthValue() - 1);
+        ListDate.add(2, localDate.getDayOfMonth());
+        return ListDate;
     }
 
 
