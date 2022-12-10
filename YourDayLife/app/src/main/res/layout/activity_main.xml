@@ -63,25 +63,76 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="20dp"
-            android:layout_weight ="3">
+            android:layout_weight ="5">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_view"
+                android:id="@+id/schedule_recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 tools:listitem = "@layout/list_row_schedule" />
 
         </LinearLayout>
 
+
+
+        <!--   전체 공지 사항     -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="전체 공지 사항" />
 
-        <ListView
-            android:layout_weight="6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_weight="5"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#BFAFBF"
+                android:orientation="horizontal"
+                android:padding="8dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.15"
+                    android:text="작성일"
+                    android:textSize="14sp"
+                    android:gravity="center"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="내용"
+                    android:textSize="14sp"
+                    android:gravity="center"/>
+                <TextView
+                    android:id="@+id/text_notice_show_all"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.2"
+                    android:text="전체보기"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:gravity="center"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_weight ="3">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/notice_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:listitem = "@layout/list_row_notice" />
+
+            </LinearLayout>
+
+        </LinearLayout>
 
     </LinearLayout>
 

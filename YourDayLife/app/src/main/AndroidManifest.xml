@@ -17,7 +17,7 @@
             android:name=".DiaryActivity"
             android:exported="false" />
         <activity
-            android:name=".CrawllingTestActivity"
+            android:name=".CustomNoticeCrawlling"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

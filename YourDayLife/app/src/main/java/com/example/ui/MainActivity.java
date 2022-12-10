@@ -16,18 +16,21 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 import com.example.ui.DB.Model.ScheduleData;
-import com.example.ui.Module.CustomCrawlling;
+import com.example.ui.Module.CustomNoticeCrawlling;
+import com.example.ui.Module.CustomScheduleCrawlling;
+import com.example.ui.Notice.NoticeRecyclerAdapter;
 import com.example.ui.Schedule.ScheduleRecyclerAdapter;
 import com.example.ui.Todo.TodoListActivity;
+import com.example.ui.Todo.VariableSet;
 import com.google.android.material.navigation.NavigationView;
 import com.jakewharton.threetenabp.AndroidThreeTen;
 
@@ -40,8 +43,8 @@ public class MainActivity extends AppCompatActivity {
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
     private ImageView toolbar_menu, toolbar_todo, toolbar_sync;
-    private TextView textScheduleShowAll;
-    private RecyclerView recyclerView;
+    private TextView textScheduleShowAll,textNoticeShowAll;
+    private RecyclerView scheduleRecyclerView, noticeRecyclerView;
 
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -59,12 +62,30 @@ public class MainActivity extends AppCompatActivity {
         toolbar_todo = findViewById(R.id.toolbar_todo);
         toolbar_sync = findViewById(R.id.toolbar_sync);
         textScheduleShowAll = findViewById(R.id.text_schedule_show_all);
-        recyclerView = findViewById(R.id.recycler_view);
+        textNoticeShowAll = findViewById(R.id.text_notice_show_all);
+
+        scheduleRecyclerView = findViewById(R.id.schedule_recycler_view);
+        noticeRecyclerView = findViewById(R.id.notice_recycler_view);
 
         //올해 주요 학사일정(Schedule Data) DB >> RecyclerView 불러오기
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        scheduleRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         ScheduleRecyclerAdapter sra = new ScheduleRecyclerAdapter(this);
-        recyclerView.setAdapter(sra);
+        scheduleRecyclerView.setAdapter(sra);
+
+
+
+        //전체 공지사항 Web Crawlling >> RecyclerView 불러오기
+        noticeRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        CustomNoticeCrawlling customNoticeCrawlling = new CustomNoticeCrawlling(MainActivity.this);
+        customNoticeCrawlling.getCrawlling();
+        customNoticeCrawlling.returnDataList.observe(MainActivity.this, new Observer<List<CustomNoticeCrawlling.DataList>>() {
+            @Override
+            public void onChanged(List<CustomNoticeCrawlling.DataList> dataLists) {
+                NoticeRecyclerAdapter nra = new NoticeRecyclerAdapter(MainActivity.this, dataLists);
+                noticeRecyclerView.setAdapter(nra);
+            }
+        });
+
 
         //오른쪽 상단 체크(TodoList) 버튼
         toolbar_todo.setOnClickListener(new View.OnClickListener() {
@@ -79,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
         toolbar_sync.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CustomCrawlling customCrawlling = new CustomCrawlling(MainActivity.this);
+                CustomScheduleCrawlling customCrawlling = new CustomScheduleCrawlling(MainActivity.this);
                 customCrawlling.getCrawlling();
 
                 customCrawlling.liveScheduleData.observe(MainActivity.this, new Observer<List<ScheduleData>>() {
@@ -106,11 +127,6 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
                 switch (menuItem.getItemId()){
-                    case R.id.menu_uniCal:
-                        Intent intent_main = new Intent(MainActivity.this, CrawllingTestActivity.class);
-                        startActivity(intent_main);
-                        drawerLayout.closeDrawers();
-                        return true;
                     case R.id.menu_diary:
                         Intent intent_diary = new Intent(MainActivity.this, DiaryActivity.class);
                         startActivity(intent_diary);
@@ -126,11 +142,20 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //학사일정 '모두▶' 텍스트 클릭시
+        //학사일정 '전체보기' 텍스트 클릭시
         textScheduleShowAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.syu.ac.kr/academic/major-schedule/"));
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(VariableSet.getSyuScheduleUri()));
+                startActivity(intent);
+            }
+        });
+
+        //공지사항 '전체보기' 텍스트 클릭시
+        textNoticeShowAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(VariableSet.getSyuNoticeUri()));
                 startActivity(intent);
             }
         });

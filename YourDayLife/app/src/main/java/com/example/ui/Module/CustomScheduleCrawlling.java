@@ -20,6 +20,7 @@ import com.example.ui.DB.Model.ScheduleData;
 import com.example.ui.DB.RoomDB;
 import com.example.ui.MainActivity;
 import com.example.ui.R;
+import com.example.ui.Todo.VariableSet;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -31,18 +32,17 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
 
-//안성민 - 크롤링 모듈
-public class CustomCrawlling {
+//안성민 - 학사일정 크롤링 모듈
+public class CustomScheduleCrawlling {
     private Context context;
-    public CustomCrawlling(Context context) {
+    public CustomScheduleCrawlling(Context context) {
         this.context = context;
     }
 
-    private String url = "https://www.syu.ac.kr/academic/major-schedule/"; //학사일정
+    private String url = VariableSet.getSyuScheduleUri(); //학사일정
     private RoomDB database;
     private List<ScheduleData> scheduleData;
     public MutableLiveData<List<ScheduleData>> liveScheduleData = new MutableLiveData<>();
-    private Bundle bundle = new Bundle();
 
 
     //삼육대학교 홈페이지(syu.ac.kr)에서 학사 일정 (1년) 크롤링 해서 DB에 저장하기
