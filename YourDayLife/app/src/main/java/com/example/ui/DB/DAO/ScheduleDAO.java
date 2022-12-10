@@ -25,7 +25,7 @@ public interface ScheduleDAO {
     @Query("SELECT * FROM ScheduleData")
     List<ScheduleData> getAll();
 
-    @Query("SELECT * FROM ScheduleData WHERE date LIKE '%' || :monthAndDay  || '%'")
+    @Query("SELECT * FROM ScheduleData WHERE startDate LIKE '%' || :monthAndDay  || '%'")
     List<ScheduleData> getCurrentMonth(String monthAndDay);
 
 }

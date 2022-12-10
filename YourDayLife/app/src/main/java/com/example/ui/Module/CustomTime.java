@@ -19,7 +19,7 @@ public class CustomTime {
     static LocalDate localDate = LocalDate.now();
     static long mNow = System.currentTimeMillis();
 
-    //현재 시각을 객체로 반환
+    //오늘 날짜를 객체로 반환
     public static LocalDate getToday() {
 //        System.out.println("localDateTime : "+localDateTime.toString());
 //        System.out.println("getYear : "+localDateTime.getYear());

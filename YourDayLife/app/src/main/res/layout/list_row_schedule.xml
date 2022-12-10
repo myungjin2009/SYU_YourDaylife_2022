@@ -10,23 +10,33 @@
         android:id="@+id/mainView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#AFAFAF"
+        android:background="#DFDFDF"
         android:orientation="horizontal"
-        android:padding="8dp">
+        android:padding="8dp"
+        android:layout_marginBottom="3dp">
+
 
         <TextView
-            android:id="@+id/text_view_date"
+            android:id="@+id/textStartDate"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.35"
-            android:text="내용"
+            android:layout_weight="0.17"
+            android:text="시작일"
             android:textSize="14sp"
             android:gravity="center"/>
+        <TextView
+            android:id="@+id/textEndDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.17"
+            android:text="종료일"
+            android:textSize="14sp"
+            android:gravity="left"/>
         <TextView
             android:id="@+id/text_view_content"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.65"
+            android:layout_weight="0.66"
             android:text="내용"
             android:textSize="14sp" />
 

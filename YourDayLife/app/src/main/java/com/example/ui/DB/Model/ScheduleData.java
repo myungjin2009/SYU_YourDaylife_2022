@@ -2,6 +2,7 @@ package com.example.ui.DB.Model;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity
@@ -13,11 +14,17 @@ public class ScheduleData {
     private String year;
 
     @ColumnInfo
-    private String date;
+    private String startDate;
+
+    @ColumnInfo
+    private String endDate;
 
     @ColumnInfo
     private String content;
 
+    //1-오늘의 일정 | 0-아직 안 다가온 일정
+    @Ignore
+    private boolean isTodaySchedule;
 
     public String getYear() {
         return year;
@@ -25,14 +32,6 @@ public class ScheduleData {
 
     public void setYear(String year) {
         this.year = year;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
     }
 
     public String getContent() {
@@ -49,5 +48,29 @@ public class ScheduleData {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
+
+    public boolean getIsTodaySchedule() {
+        return isTodaySchedule;
+    }
+
+    public void setIsTodaySchedule(boolean isTodaySchedule) {
+        this.isTodaySchedule = isTodaySchedule;
     }
 }

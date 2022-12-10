@@ -2,6 +2,7 @@ package com.example.ui;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -11,12 +12,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -36,9 +40,11 @@ public class MainActivity extends AppCompatActivity {
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
     private ImageView toolbar_menu, toolbar_todo, toolbar_sync;
+    private TextView textScheduleShowAll;
     private RecyclerView recyclerView;
 
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         AndroidThreeTen.init(this);
@@ -52,9 +58,10 @@ public class MainActivity extends AppCompatActivity {
         toolbar_menu = findViewById(R.id.toolbar_menu);
         toolbar_todo = findViewById(R.id.toolbar_todo);
         toolbar_sync = findViewById(R.id.toolbar_sync);
+        textScheduleShowAll = findViewById(R.id.text_schedule_show_all);
+        recyclerView = findViewById(R.id.recycler_view);
 
         //올해 주요 학사일정(Schedule Data) DB >> RecyclerView 불러오기
-        recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         ScheduleRecyclerAdapter sra = new ScheduleRecyclerAdapter(this);
         recyclerView.setAdapter(sra);
@@ -116,6 +123,15 @@ public class MainActivity extends AppCompatActivity {
                         return true;
                 }
                 return false;
+            }
+        });
+
+        //학사일정 '모두▶' 텍스트 클릭시
+        textScheduleShowAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.syu.ac.kr/academic/major-schedule/"));
+                startActivity(intent);
             }
         });
     }

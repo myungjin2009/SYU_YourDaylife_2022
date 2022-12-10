@@ -27,6 +27,7 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -69,14 +70,16 @@ public class CustomCrawlling {
                         database.scheduleDao().reset(scheduleData);
 
                         for (int i = 0; i < Month.size(); i++) {
-                            Log.d("년도", Year.select(".year").text());
-                            Log.d("월", Month.select("dt").eq(i).text());
-                            Log.d("일정 내용",  Scl.select("dd").eq(i).text());
-
-
+                            //"년도" Year.select(".year").text()
+                            //"월" Month.select("dt").eq(i).text()
+                            //"일정 내용" Scl.select("dd").eq(i).text()
                             ScheduleData scheduleData = new ScheduleData();
                             scheduleData.setYear(Year.select(".year").text());
-                            scheduleData.setDate(Month.select("dt").eq(i).text());
+                            String[] dateSplit = (Month.select("dt").eq(i).text()).split(" ~ ", 2);
+                            scheduleData.setStartDate(dateSplit[0]);
+                            //종료일이 없을 경우의 예외처리
+                            try { scheduleData.setEndDate(dateSplit[1]); }
+                            catch (Exception e) { scheduleData.setEndDate(dateSplit[0]); }
                             scheduleData.setContent(Scl.select("dd").eq(i).text());
                             database.scheduleDao().insert(scheduleData);
                         }
