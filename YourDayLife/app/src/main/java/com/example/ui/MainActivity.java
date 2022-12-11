@@ -11,7 +11,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -34,17 +37,31 @@ import com.example.ui.Todo.VariableSet;
 import com.google.android.material.navigation.NavigationView;
 import com.jakewharton.threetenabp.AndroidThreeTen;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
-
 
 public class MainActivity extends AppCompatActivity {
 
     public Toolbar toolbar;
     private NavigationView navigationView;
-    private DrawerLayout drawerLayout;
-    private ImageView toolbar_menu, toolbar_todo, toolbar_sync;
+    private ImageView toolbar_todo, toolbar_sync;
     private TextView textScheduleShowAll,textNoticeShowAll;
     private RecyclerView scheduleRecyclerView, noticeRecyclerView;
+
+    //하단메뉴
+    private HomeFragment homeFragment;
+    private DiaryFragment diaryFragment;
+    private SettingFragment settingFragment;
+    //다이얼로그
+    private ImageView toolbar_add;
+    //상단툴바
+    private TextView toolbar_date;
+    //날짜
+    private DatePickerDialog dpd;
+    public int date_y, date_m;
+
+    public static Context context_main;
 
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -52,13 +69,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         AndroidThreeTen.init(this);
         super.onCreate(savedInstanceState);
+        context_main = this;
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT); //화면 고정
         setContentView(R.layout.activity_main);
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         navigationView = findViewById(R.id.navi_view);
-        drawerLayout = findViewById(R.id.drawer);
-        drawerLayout.setDrawerLockMode(drawerLayout.LOCK_MODE_LOCKED_CLOSED); //드로어 swipe 금지
-        toolbar_menu = findViewById(R.id.toolbar_menu);
         toolbar_todo = findViewById(R.id.toolbar_todo);
         toolbar_sync = findViewById(R.id.toolbar_sync);
         textScheduleShowAll = findViewById(R.id.text_schedule_show_all);
@@ -66,6 +82,17 @@ public class MainActivity extends AppCompatActivity {
 
         scheduleRecyclerView = findViewById(R.id.schedule_recycler_view);
         noticeRecyclerView = findViewById(R.id.notice_recycler_view);
+
+
+        /*상단툴바*/
+        //날짜표시 기능구현
+        toolbar_date = findViewById(R.id.toolbar_date);
+        Calendar cal = new GregorianCalendar();
+        date_y = cal.get(Calendar.YEAR);
+        date_m = cal.get(Calendar.MONTH)+1;
+        toolbar_date.setText(date_y + "." + date_m);
+
+
 
         //올해 주요 학사일정(Schedule Data) DB >> RecyclerView 불러오기
         scheduleRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -112,35 +139,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-        //왼쪽 상단 드로어 메뉴(삼지창)버튼 눌렀을때
-        toolbar_menu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                drawerLayout.openDrawer(Gravity.LEFT);
-            }
-        });
-
-        //드로어 메뉴(삼지창) 옵션
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-
-                switch (menuItem.getItemId()){
-                    case R.id.menu_diary:
-                        Intent intent_diary = new Intent(MainActivity.this, DiaryActivity.class);
-                        startActivity(intent_diary);
-                        drawerLayout.closeDrawers();
-                        return true;
-                    case R.id.menu_setting:
-                        Intent intent_setting = new Intent(MainActivity.this, SettingActivity.class);
-                        startActivity(intent_setting);
-                        drawerLayout.closeDrawers();
-                        return true;
-                }
-                return false;
-            }
-        });
 
         //학사일정 '전체보기' 텍스트 클릭시
         textScheduleShowAll.setOnClickListener(new View.OnClickListener() {
