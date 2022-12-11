@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        /*하단메뉴*/
+        /*하단 네비게이션 메뉴*/
         homeFragment = new HomeFragment();
         diaryFragment = new DiaryFragment();
         settingFragment = new SettingFragment();

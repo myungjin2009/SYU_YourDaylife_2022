@@ -5,64 +5,47 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.lifecycle.Observer;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 
 import android.app.DatePickerDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
-import android.util.Log;
-import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 
-import com.example.ui.DB.Model.ScheduleData;
-import com.example.ui.Module.CustomNoticeCrawlling;
-import com.example.ui.Module.CustomScheduleCrawlling;
-import com.example.ui.Notice.NoticeRecyclerAdapter;
-import com.example.ui.Schedule.ScheduleRecyclerAdapter;
-import com.example.ui.Todo.TodoListActivity;
-import com.example.ui.Todo.VariableSet;
-import com.google.android.material.navigation.NavigationView;
+import com.example.ui.Module.CustomEventBus;
+import com.example.ui.Todo.TodoListDialog;
+import com.google.android.material.navigation.NavigationBarView;
 import com.jakewharton.threetenabp.AndroidThreeTen;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static Context context_main;
+
+    //날짜
+    private DatePickerDialog dpd;
+    public int date_y, date_m;
+
+    //상단툴바
     public Toolbar toolbar;
-    private NavigationView navigationView;
-    private ImageView toolbar_todo, toolbar_sync;
-    private TextView textScheduleShowAll,textNoticeShowAll;
-    private RecyclerView scheduleRecyclerView, noticeRecyclerView;
+    public TextView toolbar_date;
+    private ImageView toolbar_add, toolbar_todo, toolbar_sync;
 
     //하단메뉴
     private HomeFragment homeFragment;
     private DiaryFragment diaryFragment;
     private SettingFragment settingFragment;
-    //다이얼로그
-    private ImageView toolbar_add;
-    //상단툴바
-    private TextView toolbar_date;
-    //날짜
-    private DatePickerDialog dpd;
-    public int date_y, date_m;
-
-    public static Context context_main;
-
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -70,46 +53,33 @@ public class MainActivity extends AppCompatActivity {
         AndroidThreeTen.init(this);
         super.onCreate(savedInstanceState);
         context_main = this;
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT); //화면 고정
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT); //화면회전 강제 고정
         setContentView(R.layout.activity_main);
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        navigationView = findViewById(R.id.navi_view);
-        toolbar_todo = findViewById(R.id.toolbar_todo);
-        toolbar_sync = findViewById(R.id.toolbar_sync);
-        textScheduleShowAll = findViewById(R.id.text_schedule_show_all);
-        textNoticeShowAll = findViewById(R.id.text_notice_show_all);
 
-        scheduleRecyclerView = findViewById(R.id.schedule_recycler_view);
-        noticeRecyclerView = findViewById(R.id.notice_recycler_view);
+        toolbar_todo = findViewById(R.id.toolbar_todo);
+        toolbar_add = findViewById(R.id.toolbar_add);
+        toolbar_sync = findViewById(R.id.toolbar_sync);
+
+        homeFragment = new HomeFragment();
+        diaryFragment = new DiaryFragment();
+        settingFragment = new SettingFragment();
 
 
         /*상단툴바*/
-        //날짜표시 기능구현
+        //오른쪽 상단 날짜표시(년도,월) 기능
         toolbar_date = findViewById(R.id.toolbar_date);
         Calendar cal = new GregorianCalendar();
         date_y = cal.get(Calendar.YEAR);
         date_m = cal.get(Calendar.MONTH)+1;
         toolbar_date.setText(date_y + "." + date_m);
-
-
-
-        //올해 주요 학사일정(Schedule Data) DB >> RecyclerView 불러오기
-        scheduleRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        ScheduleRecyclerAdapter sra = new ScheduleRecyclerAdapter(this);
-        scheduleRecyclerView.setAdapter(sra);
-
-
-
-        //전체 공지사항 Web Crawlling >> RecyclerView 불러오기
-        noticeRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        CustomNoticeCrawlling customNoticeCrawlling = new CustomNoticeCrawlling(MainActivity.this);
-        customNoticeCrawlling.getCrawlling();
-        customNoticeCrawlling.returnDataList.observe(MainActivity.this, new Observer<List<CustomNoticeCrawlling.DataList>>() {
+        //날짜수정 기능
+        toolbar_date.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onChanged(List<CustomNoticeCrawlling.DataList> dataLists) {
-                NoticeRecyclerAdapter nra = new NoticeRecyclerAdapter(MainActivity.this, dataLists);
-                noticeRecyclerView.setAdapter(nra);
+            public void onClick(View v) {
+                spinnerDialog spinnerDlg = new spinnerDialog(MainActivity.this);
+                spinnerDlg.show();
             }
         });
 
@@ -118,44 +88,52 @@ public class MainActivity extends AppCompatActivity {
         toolbar_todo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TodoListActivity todoListActivity = new TodoListActivity(MainActivity.this);
-                todoListActivity.show();
+                TodoListDialog todoListDialog = new TodoListDialog(MainActivity.this);
+                todoListDialog.show();
             }
         });
-
         //오른쪽 상단 새로고침(Sync) 버튼
         toolbar_sync.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CustomScheduleCrawlling customCrawlling = new CustomScheduleCrawlling(MainActivity.this);
-                customCrawlling.getCrawlling();
-
-                customCrawlling.liveScheduleData.observe(MainActivity.this, new Observer<List<ScheduleData>>() {
-                    @Override
-                    public void onChanged(List<ScheduleData> scheduleData) {
-                        sra.updateSchedule();
-                    }
-                });
+                //HomeFragment로 CustomEventBus 이벤트 전달
+                EventBus.getDefault().post(new CustomEventBus.CustomOnClickEvent("toolbar_sync"));
             }
         });
 
 
-        //학사일정 '전체보기' 텍스트 클릭시
-        textScheduleShowAll.setOnClickListener(new View.OnClickListener() {
+        //앱 구동시 첫 화면으로 HomeFragment 띄움
+        getSupportFragmentManager().beginTransaction().replace(R.id.container, homeFragment).commit();
+
+
+        /*하단메뉴*/
+        NavigationBarView navigationbarView = findViewById(R.id.bottom_menu);
+        navigationbarView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(VariableSet.getSyuScheduleUri()));
-                startActivity(intent);
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.diary_bottom_menu:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.container, diaryFragment).commit();
+                        toolbar_todo.setVisibility(View.VISIBLE);
+                        toolbar_sync.setVisibility(View.INVISIBLE);
+                        toolbar_add.setVisibility(View.VISIBLE);
+                        return true;
+                    case R.id.home_bottom_menu:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.container, homeFragment).commit();
+                        toolbar_todo.setVisibility(View.VISIBLE);
+                        toolbar_sync.setVisibility(View.VISIBLE);
+                        toolbar_add.setVisibility(View.INVISIBLE);
+                        return true;
+                    case R.id.setting_bottom_menu:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.container, settingFragment).commit();
+                        toolbar_todo.setVisibility(View.INVISIBLE);
+                        toolbar_sync.setVisibility(View.INVISIBLE);
+                        toolbar_add.setVisibility(View.INVISIBLE);
+                        return true;
+                }
+                return false;
             }
         });
 
-        //공지사항 '전체보기' 텍스트 클릭시
-        textNoticeShowAll.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(VariableSet.getSyuNoticeUri()));
-                startActivity(intent);
-            }
-        });
     }
 }

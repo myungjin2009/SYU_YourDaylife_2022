@@ -25,7 +25,7 @@ import com.example.ui.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TodoListActivity extends Dialog {
+public class TodoListDialog extends Dialog {
 
     Activity activity;
     Context context;
@@ -39,12 +39,12 @@ public class TodoListActivity extends Dialog {
     TodoRecyclerAdapter adapter;
 
 
-    public TodoListActivity(@NonNull Context context) {
+    public TodoListDialog(@NonNull Context context) {
         super(context);
         this.context = context;
         activity = (Activity) context;
     }
-    public TodoListActivity(@NonNull Context context, String currentDate) {
+    public TodoListDialog(@NonNull Context context, String currentDate) {
         super(context);
         this.context = context;
         activity = (Activity) context;
@@ -110,8 +110,8 @@ public class TodoListActivity extends Dialog {
         btn_todoAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AddTodoListActivity addTodoListActivity = new AddTodoListActivity(context, currentDate);
-                addTodoListActivity.show();
+                AddTodoListDialog addTodoListDialog = new AddTodoListDialog(context, currentDate);
+                addTodoListDialog.show();
                 dismiss();
             }
         });

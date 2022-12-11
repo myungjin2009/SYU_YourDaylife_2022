@@ -19,17 +19,13 @@ import androidx.annotation.RequiresApi;
 
 import com.example.ui.DB.Model.TodoData;
 import com.example.ui.DB.RoomDB;
-import com.example.ui.MainActivity;
 import com.example.ui.Module.CustomTime;
 import com.example.ui.R;
 import com.jakewharton.threetenabp.AndroidThreeTen;
 
-import org.threeten.bp.LocalDate;
-import org.threeten.bp.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 
-public class AddTodoListActivity extends Dialog {
+public class AddTodoListDialog extends Dialog {
 
     //spinner 우선순위 값
     String[] priorityItems = {"높음", "중간", "낮음"};
@@ -43,20 +39,20 @@ public class AddTodoListActivity extends Dialog {
 
 
     Context context;
-    public AddTodoListActivity(@NonNull Context context, String currentDate) {
+    public AddTodoListDialog(@NonNull Context context, String currentDate) {
         super(context);
         this.context = context;
         this.currentDate = currentDate;
     }
 
     private void showTodoDialog(String currentDate) {
-        TodoListActivity todoListActivity;
+        TodoListDialog todoListDialog;
         if (currentDate != null) {
-            todoListActivity = new TodoListActivity(context, currentDate);
+            todoListDialog = new TodoListDialog(context, currentDate);
         } else {
-            todoListActivity = new TodoListActivity(context);
+            todoListDialog = new TodoListDialog(context);
         }
-        todoListActivity.show();
+        todoListDialog.show();
         dismiss();
     }
 
