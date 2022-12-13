@@ -118,7 +118,7 @@ public class TodoListDialog extends Dialog {
 
     }
 
-    private void loadTodo() {   //textDate 날짜의 Todo 불러와서 정렬하기
+    private void loadTodo() {   //textDate 날짜의 투두리스트 불러와서 정렬하기
         dataList.clear();
         dataList.addAll(database.mainDao().getCurrentDate(textDate.getText().toString()));     //오늘 날짜의 textString값으로 불러오기 Load
         dataList = CustomSort.sortTodoByPriority(dataList);    //정렬 알고리즘

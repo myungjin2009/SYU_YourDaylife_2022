@@ -1,42 +1,22 @@
 package com.example.ui.Module;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.MutableLiveData;
 
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.text.util.Linkify;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.DatePicker;
-import android.widget.TextView;
 
-import com.example.ui.DB.Model.ScheduleData;
-import com.example.ui.DB.RoomDB;
-import com.example.ui.R;
 import com.example.ui.Todo.VariableSet;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.nodes.Node;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
-import java.text.SimpleDateFormat;
-import java.time.Month;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 //안성민 - 전체공지 크롤링 모듈
 /* 학사공지 바로가기 -< 검색하면 학사공지 바로가기 코드들 고친거,
@@ -263,8 +243,18 @@ public class CustomNoticeCrawlling {
                     //좀 더 공부가 필요함
                     DataList dataList = new DataList();
                     dataList.setTitle(title[i]);
+                    try {
+                        Thread.sleep(100); //1초 대기
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                     dataList.setDate(date[i]);
                     dataList.setHref(my_link[i]);
+                    try {
+                        Thread.sleep(100); //1초 대기
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                     resultSet.add(dataList);
                 }
                 returnDataList.postValue(resultSet);

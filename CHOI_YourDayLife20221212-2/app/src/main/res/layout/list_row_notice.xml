@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mainView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#DFDFDF"
+    android:orientation="horizontal"
+    android:padding="5dp"
+    android:layout_marginBottom="3dp">
+
+    <TextView
+        android:id="@+id/text_notice_date"
+        android:layout_width="0dp"
+        android:layout_height="16dp"
+        android:layout_weight="0.2"
+        android:text="작성일"
+        android:textSize="12sp"
+        />
+    <TextView
+        android:id="@+id/text_notice_content"
+        android:layout_width="0dp"
+        android:layout_height="16dp"
+        android:layout_weight="0.8"
+        android:text="내용"
+        android:textSize="12sp"
+        android:maxLines="1"
+        android:ellipsize="end" />
+
+</LinearLayout>

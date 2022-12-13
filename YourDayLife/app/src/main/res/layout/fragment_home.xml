@@ -11,39 +11,17 @@
         android:orientation="vertical">
 
         <!--   주요 학사 일정   -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="주요 학사 일정" />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#BFAFBF"
-            android:orientation="horizontal"
-            android:padding="8dp">
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="0dp"
+                android:layout_weight="0.8"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.15"
-                android:text="시작일"
-                android:textSize="14sp"
-                android:gravity="center"/>
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.15"
-                android:text="종료일"
-                android:textSize="14sp"
-                android:gravity="left"/>
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.4"
-                android:text="내용"
-                android:textSize="14sp"
-                android:gravity="center"/>
+                android:text="주요 학사 일정" />
+
             <TextView
                 android:id="@+id/text_schedule_show_all"
                 android:layout_width="0dp"
@@ -53,6 +31,39 @@
                 android:textSize="14sp"
                 android:textStyle="bold"
                 android:gravity="center"/>
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#ffc0cb"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.2"
+                android:text="시작일"
+                android:textSize="14sp"
+                android:gravity="center"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.2"
+                android:text="종료일"
+                android:textSize="14sp"
+                android:gravity="center"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.6"
+                android:text="내용"
+                android:textSize="14sp"
+                android:gravity="center"/>
+
         </LinearLayout>
 
         <LinearLayout
@@ -71,10 +82,29 @@
 
 
         <!--   전체 공지 사항     -->
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="전체 공지 사항" />
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.8"
+                android:text="전체 공지 사항" />
+
+            <TextView
+                android:id="@+id/text_notice_show_all"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.2"
+                android:text="전체보기"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:gravity="center"/>
+
+        </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -85,33 +115,25 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#BFAFBF"
+                android:background="#ffc0cb"
                 android:orientation="horizontal"
-                android:padding="8dp">
+                android:padding="5dp">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.15"
+                    android:layout_weight="0.2"
                     android:text="작성일"
                     android:textSize="14sp"
                     android:gravity="center"/>
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.4"
+                    android:layout_weight="0.8"
                     android:text="내용"
                     android:textSize="14sp"
                     android:gravity="center"/>
-                <TextView
-                    android:id="@+id/text_notice_show_all"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.2"
-                    android:text="전체보기"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    android:gravity="center"/>
+
             </LinearLayout>
 
             <LinearLayout

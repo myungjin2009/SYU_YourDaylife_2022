@@ -14,7 +14,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ui.DB.Model.TodoData;
@@ -57,15 +56,15 @@ public class TodoRecyclerAdapter extends RecyclerView.Adapter<TodoRecyclerAdapte
         switch (data.getPriority()) {
             case 0:
                 priority = "높음!";
-                holder.mainView.setBackgroundColor(Color.parseColor("#CD3861")); //옅은 자홍색
+                holder.mainView.setBackgroundColor(Color.parseColor("#ffc0cb")); //핑크
                 break;
             case 1:
                 priority = "중간";
-                holder.mainView.setBackgroundColor(Color.parseColor("#FFE650")); //옅은 노랑색
+                holder.mainView.setBackgroundColor(Color.parseColor("#fecdc1")); //살구
                 break;
             case 2:
                 priority = "낮음";
-                //DEFAULT COLOR : #BDBDBD : 짙은 회색
+                holder.mainView.setBackgroundColor(Color.parseColor("#a27c82")); //갈색
                 break;
         }
         holder.priorityView.setText(priority);

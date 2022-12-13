@@ -6,9 +6,10 @@
     tools:context=".SettingFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <Switch
+        android:id="@+id/switch_second_notify"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="rasdasd" />
+        android:layout_height="wrap_content"
+        android:text="알림 켜기" />
 
 </FrameLayout>

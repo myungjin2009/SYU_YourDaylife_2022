@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="380dp"
+    android:layout_height="700dp">
+
+    <LinearLayout
+        android:id="@+id/xxxxx3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        //일기 대표 사진
+        <TextView
+            android:id="@+id/date_diary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textSize="22sp"/>
+
+        <ImageView
+            android:id="@+id/addImage_diary"
+            android:layout_width="match_parent"
+            android:layout_height="380dp" />
+        //사진 추가
+        <Button
+            android:id="@+id/btn_imageadd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="사진 한 장 등록"
+            android:backgroundTint="#ffc0cb"/>
+
+        //일기 작성
+        <EditText
+            android:id="@+id/addEdit_diary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        //투두 불러오는 곳
+        <TableLayout
+            android:id="@+id/addTodo_diary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        //학사일정 불러오는 곳
+        <TableLayout
+            android:id="@+id/addSchedule_diary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <Button
+                android:id="@+id/btn_diaryCancle"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="취소"
+                android:backgroundTint="#ffc0cb"/>
+            <Button
+                android:id="@+id/btn_diaryAdd"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="추가"
+                android:backgroundTint="#ffc0cb"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
