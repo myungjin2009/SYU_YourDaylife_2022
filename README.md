@@ -23,3 +23,30 @@
 
 ## 실행 화면
 - UI 프로토타입 : https://ovenapp.io/view/HsdDv6l7xo088ybvAPQHbM9aCCHPXbld/aBXrk
+- 실제 UI
+
+![SYUschedule](resources/images/SYUschedule.jpg)
+![Todo](resources/images/Todo.jpg)
+![TodoAdd](resources/images/TodoAdd.jpg)
+![Diary](resources/images/Diary.jpg)
+![DiaryView](resources/images/DiaryView.jpg)
+![DiaryAdd](resources/images/DiaryAdd.jpg)
+![Settings](resources/images/Settings.jpg)
+
+
+## 직접 실행 방법
+- 깃 코드를 압축파일로 다운로드 한다.
+- 기타 오류 방지를 위해, 위에 써놓은 '개발환경' 버전에 맞는 Java와 Android Studio를 설치한다.
+- 다운로드한 프로젝트 압축파일을 푼 후, 설치한 Android Studio를 실행하여 불러온다.
+- gradle sync오류를 방지하기 위해, build.gradle(Module: UI.app) 을 열어서 아무 내용이나 입력 후 Sync를 해준다.
+- API26이상의 안드로이드 기기 (실물 기기 또는 AVD에뮬레이터를 이용하여) 프로젝트를 실행한다.
+
+
+## 아쉬웠던 점
+- 프로토타입 UI와 크게 달라짐. (내 실력 부족)
+- 팀원들과의 소통이 부족했음. (덕분에, 개발 막바지에 UI가 크게 바뀌어버림)
+- 화이트박스 테스트를 진행하지 못하였음.
+- 여러가지 잔 버그가 많음.
+- '다크모드' 테마를 적용하지 못하였음.
+- 스파게티 코드. 중복코드가 아주 많음.
+- MVC패턴 적용을 실패하였음. (개발 시작전 설계 부족)
